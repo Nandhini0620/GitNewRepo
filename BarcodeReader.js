@@ -666,11 +666,12 @@ var HoneywellBarcodeReaderUtils =
                     // Paris/Helsinki DCS.
                     request.method = "scanner.getInfo";
 
-                    utilContext.sendJsonRpcRequestSubSys('datacollection', request, function(response) {
-                        if (utilContext.hasProperty(response, "result", true) ||
-                            utilContext.hasJsonRpcError(response)) // Accept either sucess or error response
+                  //  utilContext.sendJsonRpcRequestSubSys('datacollection', request, function(response) {
+                    //    if (utilContext.hasProperty(response, "result", true) ||
+                      //      utilContext.hasJsonRpcError(response)) // Accept either sucess or error response
                         {
                             utilContext.bridgeType = utilContext.BRIDGE_TYPE_AJAX;
+				utilContext.barcodeReaderObjName = "HoneywellBarcodeReaderAjax";
                             if (typeof (HoneywellBarcodeReaderAjax) === "undefined")
                             {
                                 utilContext.loadJavaScript(
@@ -685,7 +686,7 @@ var HoneywellBarcodeReaderUtils =
                                 utilContext.loadJavaScript("BarcodeReader-SwiftSettings.js");
                             }
                         }
-                    });
+                    //});
                 }
             }
         }
@@ -1329,7 +1330,7 @@ var HoneywellBarcodeReaderWebEventDispatcher =
 // Uses self-invoking anonymous function to provide closure and
 // prevent global variables collision.
 (function (namespaceObj) {
-    var MAX_SETUP_WAIT_TIME = 60000;
+    var MAX_SETUP_WAIT_TIME = 30000;
     var _setupTime = 0;
 
     HoneywellBarcodeReaderUtils.setup();
